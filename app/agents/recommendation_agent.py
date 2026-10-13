@@ -43,28 +43,6 @@ class RecommendationAgent:
             "last_successful_llm_call": getattr(self.provider, "last_successful_llm_call", None),
         }
 
-    @staticmethod
-    def _should_auto_fallback(exc: AgentProviderError) -> bool:
-        message = str(exc).lower()
-        return any(
-            token in message
-            for token in (
-                "404",
-                "connection",
-                "connect",
-                "timed out",
-                "timeout",
-                "refused",
-                "transport",
-                "service not found",
-                "unavailable",
-                "invalid json",
-                "validation failed",
-                "payload validation",
-                "schema",
-            )
-        )
-
     async def run(
         self,
         profile: CustomerProfile,
@@ -107,27 +85,6 @@ class RecommendationAgent:
         except AgentProviderError as exc:
             if self.allow_fallback and self.fallback is not None:
                 logger.warning("Agent provider failed; using deterministic fallback: %s", exc)
-                result = await self.fallback.generate(
-                    profile, prediction, benchmark, knowledge, memories
-                )
-                result.generated_by = f"deterministic_fallback_after:{type(exc).__name__}"
-                self.last_run_metadata.update(
-                    self._build_metadata(
-                        provider_name="deterministic",
-                        model_name=getattr(self.provider, "model_id", None),
-                        fallback_used=True,
-                        generation_mode="deterministic",
-                        fallback_reason=str(exc),
-                        llm_latency_ms=None,
-                        provider_available=bool(
-                            getattr(self.provider, "service_available", getattr(self.provider, "ollama_available", False))
-                        ),
-                        ollama_available=bool(getattr(self.provider, "ollama_available", False)),
-                    )
-                )
-                return result
-            if self._should_auto_fallback(exc):
-                logger.warning("Agent provider unavailable; using deterministic fallback for local demo path: %s", exc)
                 result = await self.fallback.generate(
                     profile, prediction, benchmark, knowledge, memories
                 )
