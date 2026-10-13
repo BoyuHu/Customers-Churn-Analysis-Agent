@@ -13,7 +13,7 @@ mlruns/
 mlflow.db
 
 # Runtime and generated artifacts. Keep only the compact tuning leaderboard
-# used by the teaching UI; bootstrap/evaluation recreate everything else.
+# used by the UI; bootstrap/evaluation recreate everything else.
 artifacts/**
 !artifacts/models/
 !artifacts/models/tuning/

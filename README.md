@@ -4,7 +4,7 @@ A **local-first enterprise AI system (personal project)** that combines ETL, sup
 
 The default scenario is **B2B AI copilot subscription retention**: think Microsoft 365 Copilot-style enterprise accounts where adoption, champions, support friction, renewal timing, and seat utilization all influence churn risk.
 
-The student-safe default uses the deterministic provider, repository-local Agent Skills,
+The default uses the deterministic provider, repository-local Agent Skills,
 and lexical TF-IDF retrieval, so the complete workflow runs without cloud credentials or
 Ollama. Microsoft Agent Framework with Ollama is the next-stage local LLM option. Chroma
 with Azure OpenAI embeddings is opt-in and its fallback status is exposed by `/health`.
@@ -211,7 +211,7 @@ the deterministic provider, so tests do not require Ollama or a paid API.
 ## Use Azure OpenAI for cloud recommendation generation
 
 The recommendation path can switch from local Ollama to Azure OpenAI without changing the
-rest of the app. The code uses raw HTTP calls, so no Azure SDK is required in the teaching
+rest of the app. The code uses raw HTTP calls, so no Azure SDK is required in the
 repo.
 
 Add this to `.env` or supply the same values through your Azure deployment:
