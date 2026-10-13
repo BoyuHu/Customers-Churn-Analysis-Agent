@@ -1,7 +1,7 @@
 # Agent Instructions
 
 ## Goal
-Maintain a local-first enterprise customer-retention teaching project. Every change should preserve the complete path from ETL to ML to agent evaluation.
+Maintain a local-first enterprise customer-retention project. Every change should preserve the complete path from ETL to ML to agent evaluation.
 
 ## Architecture boundaries
 - `pipelines/` owns offline ETL, training, inference, and evaluation.
