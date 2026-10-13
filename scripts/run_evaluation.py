@@ -14,6 +14,7 @@ async def main() -> None:
     parser.add_argument("--min-keyword-coverage", type=float, default=0.65)
     parser.add_argument("--min-review-pass-rate", type=float, default=0.95)
     parser.add_argument("--min-evidence-rate", type=float, default=1.0)
+    parser.add_argument("--min-judge-score", type=float, default=0.8)
     args = parser.parse_args()
     container = get_container()
     report = await evaluate_agent(
@@ -29,6 +30,7 @@ async def main() -> None:
         "mean_keyword_coverage": args.min_keyword_coverage,
         "review_pass_rate": args.min_review_pass_rate,
         "evidence_rate": args.min_evidence_rate,
+        "mean_judge_score": args.min_judge_score,
     }
     for metric, minimum in checks.items():
         if metrics[metric] < minimum:

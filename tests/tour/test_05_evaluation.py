@@ -14,10 +14,10 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
 
 import asyncio
 
-from pipelines.evaluation.run_agent_eval import evaluate_agent, load_golden_cases
-
-from helpers import BOOTSTRAP_HINT, get_bootstrapped
 import pytest
+from helpers import BOOTSTRAP_HINT, get_bootstrapped
+
+from pipelines.evaluation.run_agent_eval import evaluate_agent, load_golden_cases
 
 
 def test_single_golden_case() -> None:

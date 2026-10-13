@@ -777,12 +777,13 @@ elif page == "Agent Evaluation":
     model = payload.get("model", {})
 
     st.subheader("Agent regression suite")
-    e1, e2, e3, e4, e5 = st.columns(5)
+    e1, e2, e3, e4, e5, e6 = st.columns(6)
     e1.metric("Golden cases", int(metrics.get("case_count", 0)))
     e2.metric("Risk-band accuracy", f"{metrics.get('risk_band_accuracy', 0):.0%}")
     e3.metric("Action coverage", f"{metrics.get('mean_keyword_coverage', 0):.0%}")
     e4.metric("Reviewer pass rate", f"{metrics.get('review_pass_rate', 0):.0%}")
     e5.metric("Mean latency", f"{metrics.get('mean_latency_ms', 0):.0f} ms")
+    e6.metric("Judge score", f"{metrics.get('mean_judge_score', 0):.0%}")
 
     cases = pd.DataFrame(agent_eval.get("cases", []))
     if not cases.empty:

@@ -5,6 +5,7 @@ import time
 from pathlib import Path
 
 from app.workflows.customer_retention import CustomerRetentionWorkflow
+from pipelines.evaluation.judges import deterministic_judge
 
 
 def load_golden_cases(path: Path) -> list[dict]:
@@ -37,6 +38,8 @@ async def evaluate_agent(
             for keyword in case["required_action_keywords"]
             if keyword.lower() in action_text
         ]
+
+        judge = deterministic_judge(result)
         row = {
             "customer_id": case["customer_id"],
             "risk_band_correct": result.prediction.risk_band == case["expected_risk_band"],
@@ -54,6 +57,10 @@ async def evaluate_agent(
             "model": result.model,
             "generation_mode": result.generation_mode,
             "fallback_used": result.fallback_used,
+            "judge_grounded": judge["grounded"],
+            "judge_actionable": judge["actionable"],
+            "judge_safe": judge["safe"],
+            "judge_score": judge["score"],
         }
         rows.append(row)
     metrics = {
@@ -70,6 +77,10 @@ async def evaluate_agent(
         / len(rows),
         "mean_latency_ms": sum(row["latency_ms"] for row in rows) / len(rows),
         "fallback_rate": sum(row["fallback_used"] for row in rows) / len(rows),
+        "judge_grounded_rate": sum(row["judge_grounded"] for row in rows) / len(rows),
+        "judge_actionable_rate": sum(row["judge_actionable"] for row in rows) / len(rows),
+        "judge_safe_rate": sum(row["judge_safe"] for row in rows) / len(rows),
+        "mean_judge_score": sum(row["judge_score"] for row in rows) / len(rows),
     }
     provenance = {
         "providers": sorted({row["provider"] for row in rows}),

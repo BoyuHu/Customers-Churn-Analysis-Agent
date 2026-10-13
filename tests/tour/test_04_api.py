@@ -15,11 +15,11 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
 
+import pytest
 from fastapi.testclient import TestClient
+from helpers import BOOTSTRAP_HINT, get_bootstrapped
 
 from app.api.main import app
-from helpers import BOOTSTRAP_HINT, get_bootstrapped
-import pytest
 
 
 def test_health() -> None:

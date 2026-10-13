@@ -25,8 +25,8 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
 
 import asyncio
 
-from helpers import BOOTSTRAP_HINT, get_bootstrapped
 import pytest
+from helpers import BOOTSTRAP_HINT, get_bootstrapped
 
 
 async def _run_e2e(container, cid):

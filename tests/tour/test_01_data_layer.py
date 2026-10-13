@@ -13,8 +13,8 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
 
-from helpers import BOOTSTRAP_HINT, get_bootstrapped
 import pytest
+from helpers import BOOTSTRAP_HINT, get_bootstrapped
 
 
 def test_customer_profile() -> None:
