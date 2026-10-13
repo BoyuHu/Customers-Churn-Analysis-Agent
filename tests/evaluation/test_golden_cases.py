@@ -30,3 +30,4 @@ async def test_golden_dataset_regression() -> None:
     assert metrics["review_score_threshold_rate"] == 1.0
     assert metrics["evidence_rate"] == 1.0
     assert metrics["approval_alignment_rate"] == 1.0
+    assert metrics["mean_judge_score"] >= 0.80
