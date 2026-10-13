@@ -1,4 +1,4 @@
-# Example production overrides. The local course path does not require these resources.
+# Example production overrides. The local development path does not require these resources.
 application:
   environment: azure
 agent:
