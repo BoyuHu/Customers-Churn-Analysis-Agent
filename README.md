@@ -1,6 +1,6 @@
 # Enterprise Customer Retention Agent
 
-A **local-first enterprise AI system (personal project)** that combines ETL, supervised machine learning, MLflow, Microsoft Agent Framework, Ollama, memory, RAG, evaluation, FastAPI, Streamlit, Docker, GitHub Actions, and an Azure migration path.
+A **local-first enterprise AI system (personal project)** that combines ETL, supervised machine learning, Microsoft Agent Framework, Ollama, memory, RAG, evaluation, FastAPI, Streamlit, Docker, GitHub Actions, and an Azure migration path.
 
 The default scenario is **B2B AI copilot subscription retention**: think Microsoft 365 Copilot-style enterprise accounts where adoption, champions, support friction, renewal timing, and seat utilization all influence churn risk.
 
